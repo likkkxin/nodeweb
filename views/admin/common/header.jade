@@ -1,0 +1,19 @@
+.header
+        // 网站标志
+    
+            
+        .logo.fl 德利春天
+            i DELISPRING
+        //网站标志
+        //用户信息
+        .info
+            .profile.dropdown.fr
+                span.btn.dropdown-toggle(data-toggle="dropdown")
+                    | #{userinfo&&userinfo.name}
+                    span.caret
+                ul.dropdown-menu
+                    li
+                        a(href="user-edit.html") 个人资料
+                    li
+                        a(href="/admin/logout") 退出登录
+        

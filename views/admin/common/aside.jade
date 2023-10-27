@@ -1,0 +1,13 @@
+.aside.fl
+        ul.menu.list-unstyled
+            li
+                a.item(class={active:selectmark=="user"} href="/admin/user")
+                    span.glyphicon.glyphicon-user
+                    | 用户管理
+            li
+                a.item(class={active:selectmark=="article"} href="/admin/article")
+                    span.glyphicon.glyphicon-th-list
+                    | 文章管理
+        .cprt
+            | Powered by
+            a(href="http://www.delispring.top/" target="_blank") 德利春天建筑工程

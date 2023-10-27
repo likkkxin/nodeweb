@@ -1,0 +1,75 @@
+extends ./common/layout2
+block main       
+  .main
+    // 分类标题
+    .title
+      h4 用户 #{msg.toUpperCase()} 你好！
+      span 找到#{totalusers}个用户
+      a.btn.btn-primary.new(href="/admin/useredit") 新增用户
+    // /分类标题
+    // 内容列表
+    table.table.table-striped.table-bordered.table-hover.custom-table
+      thead
+        tr
+          th ID
+          th 用户名
+          th 邮箱
+          th 角色
+          th 状态
+          th 操作
+      tbody  
+      each val in data 
+        tr                     
+          td=val.id 
+          td=val.name  
+          td=val.email 
+          td=val.role=="admin"?"超级管理员":"普通用户"
+          td=val.state==1?"禁用":"启用" 
+          td
+
+            a.glyphicon.glyphicon-edit(href="/admin/useredit?id="+val.id style={display:userrole=="normal"?"none":""})
+            i.glyphicon.glyphicon-remove.delete(data-toggle="modal" data-target=".confirm-modal" data-id=val.id style={display:userrole=="normal"?"none":""})
+
+    //内容列表
+    //分页
+    - var next=Number(page)+1
+    - var previous=Number(page)-1
+    - var hide="none"
+
+    ul.pagination
+      li(style={display:page==1?hide:""})      
+        a(href="/admin/user?page="+previous)
+          span.glyphicon.glyphicon-triangle-left(aria-hidden="true")
+      - var n = 1;    
+        while n < totalpage+1 
+          li
+            a(href="/admin/user?page="+n)=n++     
+      li(style={display:page==totalpage?hide:""}) 
+        a(href="/admin/user?page="+next)
+          span.glyphicon.glyphicon-triangle-right(aria-hidden="true")
+    //分页
+    //主体内容
+    //删除确认弹出框
+block other     
+  .modal.fade.confirm-modal
+    .modal-dialog.modal-lg
+      -var id=data.id 
+        form.modal-content(method="get" action="/admin/deleteuser")
+          .modal-header
+            button.close(type="button" data-dismiss="modal" )
+              span.glyphicon.glyphicon-remove-circle
+            h4.modal-title 请确认
+          .modal-body
+            p 您确定要删除这个用户吗?
+            input(type="hidden" name="id" id="deleteuserid")
+
+          .modal-footer
+            button.btn.btn-default(type="button" data-dismiss="modal") 取消
+            input.btn.btn-primary(type="submit" )
+block script 
+  script(type="text/javascript").
+    $('.delete').on('click', function () { var id= $(this).attr('data-id');$('#deleteuserid').val(id)})
+
+
+
+
