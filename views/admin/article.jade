@@ -18,30 +18,16 @@ block main
               th 作者
               th 操作
           tbody
+          each val in articledata
             tr
-              td 5b9a716cb2d2bf17706bcc0a
-              td JavaScript基础一：基本介绍
-              td 2020-12-23
-              td 黑马讲师
+              td=val._id
+              td=val.title 
+              td=val.publishdate
+              td=val.author
               td
                 a.glyphicon.glyphicon-edit(href="/admin/article-edit")
                 i.glyphicon.glyphicon-remove(data-toggle="modal", data-target=".confirm-modal")
-            tr
-              td 5b9a716cb2d2bf17706bcc0a
-              td JavaScript基础二：代码书写位置
-              td 2020-12-24
-              td 黑马讲师
-              td
-                a.glyphicon.glyphicon-edit(href="article-edit.html")
-                i.glyphicon.glyphicon-remove(data-toggle="modal", data-target=".confirm-modal")
-            tr
-              td 5b9a716cb2d2bf17706bcc0a
-              td JavaScript基础三：代码注释
-              td 2020-12-25
-              td 黑马讲师
-              td
-                a.glyphicon.glyphicon-edit(href="article-edit.html")
-                i.glyphicon.glyphicon-remove(data-toggle="modal", data-target=".confirm-modal")
+           
         //内容列表
         //分页
         ul.pagination
