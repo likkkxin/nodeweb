@@ -3,7 +3,9 @@ const {Aricle}=require("../../model/article");
 const path=require("path")
 module.exports=async function (req, res) {
 
-    let article=await Aricle.findOne(req.query._id);
+    let article=await Aricle.findOne({_id:req.query.id});
+    
+    
 
     let filepath=path.join(__dirname,"../",'../','public',article.cover);
     fs.unlink(filepath, function(err) {

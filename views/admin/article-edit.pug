@@ -22,8 +22,8 @@ block main
           img.img-thumbnail(src=articledata.cover id="preview")
       .form-group
         label 内容
-        textarea(class="form-control" id="editor" name="content")
-                                                       #{articledata.content}
+        textarea(class="form-control" id="editor" name="content")=articledata.content
+                                                       
       .buttons
         input.btn.btn-primary(type="submit")
 
