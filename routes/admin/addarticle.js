@@ -8,8 +8,8 @@ module.exports = function (req, res) {
         uploadDir: path.join(__dirname, "../", '../', 'public', 'uploads'),
         multiples: false
     })
-    // console.log(req.body);
     form.parse(req, async(err, fields, files) => {
+
 
         await Aricle.create({
             title:fields.title[0],

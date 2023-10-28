@@ -9,7 +9,7 @@ const articleSchema = new mongoose.Schema({
     author:{
         type:String,
         required:[true,"请填入作者"],
-        ref:"User"
+        ref:"user"
     },
     publishdate:{
         type:Date,

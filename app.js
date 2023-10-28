@@ -8,6 +8,7 @@ var bodyParser = require('body-parser')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/admin');
 const session = require('express-session')
+const pug=require("pug")
 
 require('./model/connect')
 
@@ -16,7 +17,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(session({secret: 'keyboard cat', saveUninitialized:false}));
 app.use(logger('dev'));
 app.use(express.json());
