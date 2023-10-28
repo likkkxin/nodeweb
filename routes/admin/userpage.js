@@ -7,8 +7,6 @@ module.exports = async (req, res, ) => {
   let count = await User.countDocuments({});
   let total = Math.ceil(count / pagesize);
   let start =(page - 1) * pagesize
-    
-  // console.log(start);
   let totalusers = (await User.find()).length
   let users = await User.find({}).limit(pagesize).skip(()=>{(start<0)?1:start})
   req.app.locals.selectmark='user';

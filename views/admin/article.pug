@@ -1,64 +1,67 @@
 extends ./common/layout2
 block main 
-   
-      .main
-        //分类标题
-        .title
-          h4 文章
-          span 找到1篇文章
-          a.btn.btn-primary.new(href="/admin/article-edit") 发布新文章
-        //分类标题
-        //内容列表
-        table.table.table-striped.table-bordered.table-hover.custom-table
-          thead
-            tr
-              th ID
-              th 标题
-              th 发布时间
-              th 作者
-              th 操作
-          tbody
-          each val in articledata
-            tr
-              td=val._id
-              td=val.title 
-              td=val.publishdate
-              td=val.author.name
-              td
-                a.glyphicon.glyphicon-edit(href="/admin/article-edit")
-                i.glyphicon.glyphicon-remove(data-toggle="modal", data-target=".confirm-modal")
-           
-        //内容列表
-        //分页
-        ul.pagination
-          li
-            a(href="#")
-              span <<
-          li
-            a(href="#") 1
-          li
-            a(href="#") 2
-          li
-            a(href="#") 3
-          li
-            a(href="#") 4
-          li
-            a(href="#") 5
-          li
-            a(href="#")
-              span >>
 
+  .main
+    //分类标题
+    .title
+      h4 文章
+      span 找到#{articlenum}篇文章
+      a.btn.btn-primary.new(href="/admin/article-edit") 发布新文章
+    //分类标题
+    //内容列表
+    table.table.table-striped.table-bordered.table-hover.custom-table
+      thead
+        tr
+          th ID
+          th 标题
+          th 发布时间
+          th 作者
+          th 操作
+      tbody
+      each val in articledata
+        tr
+          td=val._id
+          td=val.title 
+          td=val.publishdate
+          td=val.author.name
+          td
+            a.glyphicon.glyphicon-edit(href="/admin/article-edit?id="+val._id style={display:userrole=="normal"?"none":""})
+            i.glyphicon.glyphicon-remove.delete(data-toggle="modal" data-target=".confirm-modal"  data-id=val._id style={display:userrole=="normal"?"none":""})
 
-      .modal.fade.confirm-modal
-        .modal-dialog.modal-lg
-          form.modal-content
-            .modal-header
-              button.close(type="button", data-dismiss="modal")
-                span &amp;times;
-              h4.modal-title 请确认
-            .modal-body
-              p 您确定要删除这篇文章吗?
-            .modal-footer
-              button.btn.btn-default(type="button", data-dismiss="modal") 取消
-              input.btn.btn-primary(type="submit")
+    //内容列表
+    //分页
+    ul.pagination
+      li
+        a(href="#")
+          span <<
+      li
+        a(href="#") 1
+      li
+        a(href="#") 2
+      li
+        a(href="#") 3
+      li
+        a(href="#") 4
+      li
+        a(href="#") 5
+      li
+        a(href="#")
+          span >>
 
+block other      
+  .modal.fade.confirm-modal
+    .modal-dialog.modal-lg
+      form.modal-content(method="get" action="/admin/deletearticle")
+        .modal-header
+          button.close(type="button" data-dismiss="modal")
+            span.glyphicon.glyphicon-remove-circle
+          h4.modal-title 请确认
+        .modal-body
+          p 您确定要删除这篇文章吗?
+          input(type="hidden" name="id" id="deletearticleid")
+        .modal-footer
+          button.btn.btn-default(type="button" data-dismiss="modal") 取消
+          input.btn.btn-primary(type="submit")
+block script 
+  script(type="text/javascript").
+    $('.delete').on('click', function () { var id= $(this).attr('data-id');$('#deletearticleid').val(id)})

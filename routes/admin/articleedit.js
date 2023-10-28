@@ -1,7 +1,18 @@
-const fs = require("fs")
-const path=require("path")
 
-module.exports = function async (req, res, next) {
+const path=require("path")
+const {Aricle}=require("../../model/article")
+const fs=require("fs")
+
+module.exports = async function  (req, res, next) {
   req.app.locals.selectmark = 'article'; 
-  res.render("./admin/article-edit")
+  if (req.query) {
+    let article=await Aricle.findById(req.query.id)
+    res.render("./admin/article-edit",{
+      articledata:article
+    })
+
+    
+  } else {
+    res.render("./admin/article-edit")
+  }
 }

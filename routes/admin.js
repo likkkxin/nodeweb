@@ -5,8 +5,14 @@ const saltRounds = 10;
 
 
 /* GET users listing. */
-//展示用户路由
+//删除文章路由
+
+router.get('/deletearticle', require("./admin/deletearticle"));
+
+//添加文章路由
 router.post('/article-add', require("./admin/addarticle"));
+
+//展示用户路由
 
 router.get('/user', require("./admin/userpage"));
 //编辑用户路由
