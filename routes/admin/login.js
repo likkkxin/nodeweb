@@ -23,8 +23,10 @@ const login = async (req, res) => {
             if (result) {
                 req.session.username = user.name;
                 req.session.role=user.role
+                req.session.id=user._id
+
                 req.app.locals.userinfo = user;
-                console.log(req.app.locals.userinfo);
+                // console.log(req.app.locals.userinfo);
                 res.redirect("/admin/user");
 
             }
