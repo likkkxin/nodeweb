@@ -1,7 +1,9 @@
 module.exports=function(req,res){
     req.session.destroy(function(){
     res.clearCookie("keyboard cat");
-    res.redirect("/admin/login")
+    res.redirect("/admin/login");
+    req.app.locals.userinfo = null
+
   
     })
   }

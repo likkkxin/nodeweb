@@ -1,0 +1,34 @@
+extends ./common/layout
+block css
+  link(rel='stylesheet' href='/home/css/index.css')
+block main 
+
+    include ./common/header
+    //  文章列表开始 
+    ul.list.w1100
+      each val,index in articledata.records
+        
+          li(class=index%2==0?"fl":"fr")
+            a.thumbnail(href='/article?id='+val._id)
+              img(src=val.cover)
+            .content
+              a.article-title(href='/article?id='+val._id)=val.title
+              .article-info
+                span.author=val.author.name
+                span=val.publishdate
+              .brief=val.content
+            
+    //  文章列表结束 
+    //  分页开始 
+    -var next=Number(articledata.page)+1
+    -var previous=Number(articledata.page)-1
+        .page.w1100
+          if articledata.page>1
+            a(href='/?page='+previous) 上一页
+          each val in articledata.display
+
+             a(href='/?page='+val class=val==articledata.page?"active":"")=val
+          if articledata.page<articledata.pages
+
+              a(href='/?page='+next) 下一页
+        //  分页结束 

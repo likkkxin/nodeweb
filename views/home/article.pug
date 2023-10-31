@@ -1,0 +1,47 @@
+extends ./common/layout
+block css
+  link(rel='stylesheet' href='/home/css/index.css')
+  block link
+    link(rel='stylesheet' href='/home/css/article.css')
+
+block main 
+
+    include ./common/header 
+
+    //  头部框架结束 
+    //  文章框架开始 
+    .article
+      .w1100
+        .container
+          .article-header
+            h3.article-title=articledata.title
+            .article-info
+              span.author=articledata.author.name
+              span=articledata.publishdate
+          .article-content
+              p !{articledata.content}
+        if userinfo
+          .article-comment
+            h4 评论
+            form.comment-form(action="/addcomment" method="POST")
+              input(type="hidden" name="aid" value=articledata._id)
+              input(type="hidden" name="uid" value=articledata.author._id)
+
+
+              textarea.comment(name="content")
+              .items
+                input(type='submit' value='提交')
+            .comment-list
+              .mb10
+                .article-info
+                  span.author Coder
+                  span 2020-09-10
+                  span wjb19891223@163.com
+                .comment-content.
+                  
+                  nice 就是这样, 非常好 !
+        else 
+          .comment-content          
+               h3  请先登录再评论
+                  
+    //  文章框架结束 

@@ -26,8 +26,12 @@ const login = async (req, res) => {
                 req.session.id=user._id
 
                 req.app.locals.userinfo = user;
-                // console.log(req.app.locals.userinfo);
-                res.redirect("/admin/user");
+                if (user.role=="admin") {
+                    res.redirect("/admin/user");
+                } else {
+                    res.redirect("/");
+                }
+                
 
             }
             res.status(400).render('./admin/erro', {
