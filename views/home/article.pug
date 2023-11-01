@@ -31,15 +31,15 @@ block main
               textarea.comment(name="content")
               .items
                 input(type='submit' value='提交')
+          each val in comments   
             .comment-list
               .mb10
                 .article-info
-                  span.author Coder
-                  span 2020-09-10
-                  span wjb19891223@163.com
-                .comment-content.
+                  span.author=val.uid.name
+                  span=val.time
+                  span=val.uid.email
+                .comment-content=val.content
                   
-                  nice 就是这样, 非常好 !
         else 
           .comment-content          
                h3  请先登录再评论
